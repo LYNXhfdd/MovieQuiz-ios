@@ -83,7 +83,7 @@ final class MovieQuizViewController: UIViewController {
     
         
         let currentQuestion = questions[currentQuestionIndex]
-        show(quiz: QuizStepViewModel(image: UIImage(named: currentQuestion.image) ?? UIImage(), question: currentQuestion.text, questionNumber: "1/10"))
+        show(quiz: QuizStepViewModel(image: UIImage(named: currentQuestion.image) ?? UIImage(), question: currentQuestion.text, questionNumber: "\(currentQuestionIndex + 1)/\(questions.count)"))
         
     }
     
@@ -105,7 +105,6 @@ final class MovieQuizViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // запускаем задачу через 1 секунду
             // код, который вы хотите вызвать через 1 секунду,
-            // в нашем случае это просто функция showNextQuestionOrResults()
             self.showNextQuestionOrResults()
         }
     }
