@@ -86,8 +86,8 @@ final class MovieQuizViewController: UIViewController {
         super.viewDidLoad()
         
         let currentQuestion = questions[currentQuestionIndex]
-        show(quiz: QuizStepViewModel(image: UIImage(named: currentQuestion.image) ?? UIImage(), question: currentQuestion.text, questionNumber: "\(currentQuestionIndex + 1)/\(questions.count)"))
-
+        let viewModel = convert(model: currentQuestion)
+        show(quiz: viewModel)
         
     }
     
@@ -116,20 +116,6 @@ final class MovieQuizViewController: UIViewController {
             self.changeButtonsStatus()
             
         }
-    }
-    
-    @IBAction private func yesButtonClicked(_ sender: UIButton) {
-        let currentQuestion = questions[currentQuestionIndex]
-        let givenAnswer = true
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
-        changeButtonsStatus()
-    }
-    
-    @IBAction private func noButtonClicked(_ sender: UIButton) {
-        let currentQuestion = questions[currentQuestionIndex]
-        let givenAnswer = false
-        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
-        changeButtonsStatus()
     }
     
     private func showNextQuestionOrResults() {
@@ -182,7 +168,7 @@ final class MovieQuizViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func changeButtonsStatus() {
+    private func changeButtonsStatus() {
         if yesButton.isEnabled == true && noButton.isEnabled == true {
             yesButton.isEnabled = false
             noButton.isEnabled = false
@@ -192,4 +178,17 @@ final class MovieQuizViewController: UIViewController {
         }
     }
     
+    @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        let currentQuestion = questions[currentQuestionIndex]
+        let givenAnswer = true
+        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        changeButtonsStatus()
+    }
+    
+    @IBAction private func noButtonClicked(_ sender: UIButton) {
+        let currentQuestion = questions[currentQuestionIndex]
+        let givenAnswer = false
+        showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+        changeButtonsStatus()
+    }
 }
