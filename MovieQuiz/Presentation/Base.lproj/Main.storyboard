@@ -9,6 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="YS Display-Bold.ttf">
+            <string>YSDisplay-Bold</string>
+        </array>
         <array key="YS Display-Medium.ttf">
             <string>YSDisplay-Medium</string>
         </array>
@@ -59,7 +62,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма меньше, чем 5?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLM-VS-I6i" userLabel="Question Label">
                                                 <rect key="frame" x="42" y="13" width="290" height="55"/>
-                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="23"/>
+                                                <fontDescription key="fontDescription" name="YSDisplay-Bold" family="YS Display" pointSize="23"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -133,7 +136,7 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="YP Black "/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="E58-Xs-aeA" secondAttribute="trailing" constant="20" id="bKk-SL-yeO"/>
                             <constraint firstItem="E58-Xs-aeA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="gnJ-D0-KQh"/>
@@ -143,7 +146,9 @@
                     <connections>
                         <outlet property="counterLabel" destination="8wf-Wr-UhF" id="g7o-7R-ZWY"/>
                         <outlet property="imageView" destination="Kyc-gt-yZe" id="YHs-h3-yV6"/>
+                        <outlet property="noButton" destination="x8b-JC-823" id="p5L-F7-Nb7"/>
                         <outlet property="textLabel" destination="QLM-VS-I6i" id="icp-Sc-ORP"/>
+                        <outlet property="yesButton" destination="vek-0o-fr5" id="Wys-he-SHe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
