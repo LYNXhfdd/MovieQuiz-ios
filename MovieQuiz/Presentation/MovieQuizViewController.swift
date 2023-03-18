@@ -18,6 +18,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     
+    private var statisticService: StatisticService?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         
         questionFactory?.requestNextQuestion()
         
+        statisticService = StatisticServiceImplementation()
     }
     
     // MARK: - QuestionFactoryDelegate
@@ -61,32 +64,28 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { // запускаем задачу через 1 секунду
-            [weak self] /*_*/ in
+            [weak self]  in
             guard let self = self else {return}
             // код, который вы хотите вызвать через 1 секунду,
             self.showNextQuestionOrResults()
             self.imageView.layer.borderWidth = 0
             self.changeButtonsStatus()
-            
         }
     }
     
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
-            // показать результат квиза
-            let text = correctAnswers == questionsAmount ?
-            "поздравляем, Выответили на 10 из 10!" :
-            "Ваш результат: \(correctAnswers) из 10, попробуйте ещё раз!"
-            let viewModel = QuizResultsViewModel(
-                title: "Этот раунд окончен!",
-                text: text,
-                buttonText: "Cыграть ещё раз")
-            show(quiz: viewModel)
-        } else {
-            currentQuestionIndex += 1 // увеличиваем индекс текущего вопроса на 1; таким образом мы сможем получить следующий вопрос
-            // показать следующий вопрос
-            questionFactory?.requestNextQuestion()
-        }
+            statisticService!.store(correct: correctAnswers, total: questionsAmount)
+            
+            let text = "Ваш результат:\(correctAnswers)/\(questionsAmount)\nКоличество сыгранных квизов:\(statisticService!.gamesCount)\nРекорд: \(statisticService!.bestGame.correct)/\(statisticService!.bestGame.total) (\(statisticService!.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f%%", 100*statisticService!.totalAccuracy))"
+
+            self.show(quiz: QuizResultsViewModel(title: "Результаты", text: text, buttonText: "Сыграть еще раз"))
+      } else {
+        currentQuestionIndex += 1
+          
+        // показать следующий вопрос
+          self.questionFactory?.requestNextQuestion()
+      }
     }
     
     private func show(quiz step: QuizStepViewModel) {

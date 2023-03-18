@@ -2,10 +2,10 @@ import Foundation
 import UIKit
 
 
-class AlertPresenter {
-    let alert: AlertModel
+final class AlertPresenter {
+    private let alert: AlertModel
 
-    init(title: String, message:String,buttonText:String,completion: @escaping (()->())) {
+    init(title: String, message:String, buttonText:String, completion: @escaping (()->())) {
 
         self.alert = AlertModel (title: title, message: message,buttonText: buttonText, completion: completion)
     }
