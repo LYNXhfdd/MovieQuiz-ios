@@ -28,8 +28,8 @@ struct GameRecord: Codable {
 final class StatisticServiceImplementation: StatisticService {
         func store(correct count: Int, total amount: Int) {
         let oldGamesCount = self.gamesCount
-        let newTotalAccuracy:Double = (Double(oldGamesCount*amount)*self.totalAccuracy+Double(count))/Double(amount*(oldGamesCount+1))
-        let newGamesCount:Int = oldGamesCount+1
+        let newTotalAccuracy: Double = (Double(oldGamesCount * amount) * self.totalAccuracy + Double(count)) / Double(amount * (oldGamesCount + 1))
+        let newGamesCount: Int = oldGamesCount + 1
         let newBestGame = self.bestGame.compareWithAndReturn(correct: count, total: amount)
         
         userDefaults.set(newTotalAccuracy, forKey: Keys.accuracy.rawValue)
