@@ -1,6 +1,6 @@
 import UIKit
 
-final class MovieQuizPresenter: QuestionFactoryDelegate {
+final class MovieQuizPresenter: QuestionFactoryDelegate, MovieQuizPresenterProtocol {
     
     
     private let statisticService: StatisticService!

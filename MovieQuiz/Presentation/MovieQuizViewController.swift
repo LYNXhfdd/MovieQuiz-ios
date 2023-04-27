@@ -9,9 +9,9 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
     @IBOutlet private weak var yesButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    private var presenter: MovieQuizPresenter!
+    private var presenter: MovieQuizPresenterProtocol?
     let alertPresenter = AlertPresenter()
-     var statisticService: StatisticService?
+    var statisticService: StatisticService?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -62,12 +62,11 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
         alertPresenter.show(in: self, model: model)
     }
     
-    
     func showNetworkError(message: String) {
         activityIndicator.isHidden = true
         let alertModel = AlertModel(title: "Ошибка", message: message, buttonText: "Попробовать еще раз") {[weak self] in
             guard let self = self else { return }
-            self.presenter.resetGame()
+            self.presenter?.resetGame()
             
         }
         self.showAlert(model: alertModel)
@@ -82,12 +81,12 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
     }
     //MARK: - Actions
     
-    @IBAction func noButtonClicked(_ sender: UIButton) {
-        presenter.noButtonClicked()
+    @IBAction private func noButtonClicked(_ sender: UIButton) {
+        presenter?.noButtonClicked()
     }
     
-    @IBAction func yesButtonClicked(_ sender: UIButton) {
-        presenter.yesButtonClicked()
+    @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        presenter?.yesButtonClicked()
     }
     
 }
