@@ -5,7 +5,5 @@ protocol QuestionFactoryDelegate: AnyObject {
     func didLoadDataFromServer() // сообщение об успешной загрузке
     func didFailToLoadData(with error: Error) // сообщение об ошибке загрузки
     
-    func showLoadingIndicator()
-    func hideLoadingIndicator()
     func didFailToLoadImage()
 }
